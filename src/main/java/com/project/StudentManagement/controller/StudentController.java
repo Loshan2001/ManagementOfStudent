@@ -3,10 +3,10 @@ package com.project.StudentManagement.controller;
 import  static  com.project.StudentManagement.common.ApiPath.*;
 import com.project.StudentManagement.dao.StudentDao;
 import com.project.StudentManagement.entity.Student;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(STUDENT_BASE_API)
@@ -25,4 +25,27 @@ public class StudentController {
         return studentDao.save(student);
 
     }
+
+    @GetMapping(GET_STUDENTS)
+    public List<Student> getAllStudent(){
+        return studentDao.findAll();
+    }
+
+    @GetMapping(GET_STUDENT)
+    public Student getStudentById(@PathVariable("id") Integer id){
+        return studentDao.findById(id).orElse(null);
+    }
+
+    @GetMapping(SEARCH_STUDENT_BY_NAME)
+    public List<Student> getStudentByName(@PathVariable("studentName") String name){
+        return studentDao.findAllByFirstNameContaining(name);
+    }
+
+    @DeleteMapping(DELETE_STUDENT)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteStudent(@PathVariable("id") Integer id){
+        studentDao.deleteById(id);
+
+    }
+
 }
