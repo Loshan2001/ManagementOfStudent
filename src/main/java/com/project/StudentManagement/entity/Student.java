@@ -1,5 +1,6 @@
 package com.project.StudentManagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,4 +15,16 @@ public class Student {
     @Column(unique = true)
     private String email;
     private Integer age;
+    @OneToOne(
+            mappedBy = "student",
+            cascade = CascadeType.ALL
+    )
+    private StudentProfile studentProfile;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "school_id"
+    )
+    @JsonBackReference
+    private School school;
 }
