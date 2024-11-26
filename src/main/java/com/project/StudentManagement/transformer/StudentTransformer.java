@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 public class StudentTransformer {
 
     public Student studentDtoToStudent(StudentDto studentDto){
+        if(studentDto == null){
+            throw new NullPointerException("the StudentDto should not be Null");
+        }
         var student= new Student();
         student.setFirstName(studentDto.firstName());
         student.setLastName(studentDto.lastName());

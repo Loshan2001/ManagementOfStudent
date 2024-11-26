@@ -7,6 +7,7 @@ import com.project.StudentManagement.dto.StudentResponseDto;
 import com.project.StudentManagement.entity.Student;
 import com.project.StudentManagement.service.StudentService;
 import com.project.StudentManagement.transformer.StudentTransformer;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class StudentController {
 
 
     @PostMapping(CREATE_STUDENT)
-    public StudentResponseDto createStudent(@RequestBody StudentDto studentDto){
+    public StudentResponseDto createStudent(@Valid @RequestBody StudentDto studentDto){
        return studentService.createStudent(studentDto);
 
     }
