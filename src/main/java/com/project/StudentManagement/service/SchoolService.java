@@ -34,13 +34,13 @@ public class SchoolService {
 
     }
 
-    public SchoolDto getSchoolbyId(@PathVariable("id") Integer id){
+    public SchoolDto getSchoolbyId(Integer id){
         return schoolDao.findById(id)
                 .map(schoolTransformer::schoolToSchoolDto)
                 .orElse(null);
     }
 
-    public void deleteSchoolById(@PathVariable Integer id){
+    public void deleteSchoolById(Integer id){
         schoolDao.deleteById(id);
     }
 }
